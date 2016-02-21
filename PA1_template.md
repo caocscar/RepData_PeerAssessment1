@@ -110,7 +110,7 @@ df = data %>% group_by(date) %>% summarise(dailySteps = sum(steps, na.rm=TRUE))
 ```r
 ggplot(df,aes(dailySteps)) +
     geom_histogram(binwidth=1000, fill=('orange'), col=('black')) +
-    scale_y_continuous(breaks=seq(0,10)) +
+    scale_y_continuous(breaks=seq(0,15)) +
     theme(text=element_text(size=18)) +
     xlab('Daily Steps') +
     ylab('Days')
@@ -188,7 +188,7 @@ pMatrix[1,3] = 1
 impute missing values
 
 ```r
-imp <- mice(data, m=4, maxit=3, predictorMatrix=pMatrix)
+imp <- mice(data, m=4, maxit=3, predictorMatrix=pMatrix, seed=2016)
 ```
 
 **3.** fill in the 4th imputation
@@ -203,7 +203,7 @@ completedData <- complete(imp,4)
 df3 = completedData %>% group_by(date) %>% summarise(dailySteps = sum(steps))
 ggplot(df3,aes(dailySteps)) +
     geom_histogram(binwidth=1000, fill=('skyblue'), col=('red')) +
-    scale_y_continuous(breaks=seq(0,10)) +
+    scale_y_continuous(breaks=seq(0,15)) +
     theme(text=element_text(size=18)) +
     xlab('Daily Steps') +
     ylab('Days')
@@ -218,7 +218,7 @@ mean(df3$dailySteps)
 ```
 
 ```
-## [1] 10182.61
+## [1] 10923.77
 ```
 
 median number of steps per day
@@ -228,7 +228,7 @@ median(df3$dailySteps)
 ```
 
 ```
-## [1] 10395
+## [1] 11015
 ```
 
 Mean and median values for completed dataset are higher than those with NAs. The total daily number of steps has increased as expected.

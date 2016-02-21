@@ -55,7 +55,7 @@ df = data %>% group_by(date) %>% summarise(dailySteps = sum(steps, na.rm=TRUE))
 ```{r histogram}
 ggplot(df,aes(dailySteps)) +
     geom_histogram(binwidth=1000, fill=('orange'), col=('black')) +
-    scale_y_continuous(breaks=seq(0,10)) +
+    scale_y_continuous(breaks=seq(0,15)) +
     theme(text=element_text(size=18)) +
     xlab('Daily Steps') +
     ylab('Days')
@@ -106,7 +106,7 @@ pMatrix[1,3] = 1
 ```
 impute missing values
 ```{r, results='hide', cache=TRUE}
-imp <- mice(data, m=4, maxit=3, predictorMatrix=pMatrix)
+imp <- mice(data, m=4, maxit=3, predictorMatrix=pMatrix, seed=2016)
 ```
 
 **3.** fill in the 4th imputation
@@ -119,7 +119,7 @@ completedData <- complete(imp,4)
 df3 = completedData %>% group_by(date) %>% summarise(dailySteps = sum(steps))
 ggplot(df3,aes(dailySteps)) +
     geom_histogram(binwidth=1000, fill=('skyblue'), col=('red')) +
-    scale_y_continuous(breaks=seq(0,10)) +
+    scale_y_continuous(breaks=seq(0,15)) +
     theme(text=element_text(size=18)) +
     xlab('Daily Steps') +
     ylab('Days')
