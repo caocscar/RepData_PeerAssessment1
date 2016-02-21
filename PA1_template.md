@@ -218,7 +218,7 @@ mean(df3$dailySteps)
 ```
 
 ```
-## [1] 10735.85
+## [1] 10182.61
 ```
 
 median number of steps per day
@@ -228,7 +228,7 @@ median(df3$dailySteps)
 ```
 
 ```
-## [1] 10765
+## [1] 10395
 ```
 
 Mean and median values for completed dataset are higher than those with NAs. The total daily number of steps has increased as expected.
